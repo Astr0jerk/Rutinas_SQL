@@ -1,0 +1,30 @@
+DROP FUNCTION IF EXISTS mayorEdad;
+
+DELIMITER $$
+
+CREATE FUNCTION mayorEdad(d INT, m INT, a INT) RETURNS BOOLEAN
+BEGIN
+	DECLARE hoy DATE;
+	SET hoy=CURRENT_DATE();
+	
+	IF (year(hoy)-a)>18 THEN
+		RETURN TRUE;
+	END IF;
+	
+	IF (YEAR(hoy)-a)=18 THEN
+		IF(month(hoy)>m) THEN
+			RETURN TRUE;
+		ELSEIF(month(hoy)=m AND day(hoy)>=d) THEN
+			RETURN TRUE;
+		ELSE
+			RETURN FALSE;
+		END IF;
+	END IF;
+	RETURN FALSE;
+	
+	IF(YEAR(hoy)-a)<=17 THEN
+		RETURN FALSE;
+	END IF;
+END$$
+
+DELIMITER ;

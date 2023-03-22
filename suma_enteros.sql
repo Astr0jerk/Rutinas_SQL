@@ -1,0 +1,15 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sumaenteros $$
+
+CREATE PROCEDURE sumaenteros (N INT)
+BEGIN
+	DECLARE suma INT;
+	SET suma=0;
+		SET suma=suma+N;
+		SET N=N-1;
+	END WHILE;
+	SELECT suma;
+END $$
+
+DELIMITER ;
